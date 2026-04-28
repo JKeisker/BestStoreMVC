@@ -64,6 +64,8 @@ namespace BestStoreMVC.Services
                     UnitPrice = product.Price,
                     Product = product
                 };
+
+                cartItems.Add(item);
             }
 
             return cartItems;
