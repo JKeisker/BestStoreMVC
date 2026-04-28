@@ -7,7 +7,7 @@ namespace BestStoreMVC.Services
     {
         public static Dictionary<int, int> GetCartDictionary(HttpRequest request, HttpResponse response)
         {
-            string cookieValue = request.Cookies["shopping_cost"] ?? "";
+            string cookieValue = request.Cookies["shopping_cart"] ?? "";
 
             try
             {
