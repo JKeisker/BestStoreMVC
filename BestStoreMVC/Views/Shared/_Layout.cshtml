@@ -55,7 +55,7 @@
             let quantity = cart[id]
             if (isNaN(quantity)) {
                 //quantity is Not a Number => set quantity to 1
-                cart[id] = 1
+                cart[id] = 1;
             }
             else {
                 cart[id] = Number(quantity) + 1;
@@ -66,13 +66,57 @@
 
             let cartSize = 0;
             for (var cartItem of Object.entries(cart)) {
-                quantity = cartItem[1]
+                quantity = cartItem[1];
                 if (isNaN(quantity)) continue;
 
-                cartSize += Number(quantity)
+                cartSize += Number(quantity);
             }
 
-            document.getElementById("CartSize").innerHTML = cartSize
+            document.getElementById("CartSize").innerHTML = cartSize;
+        }
+
+        function increase(id) {
+            let cart = getShoppingCart();
+
+            let quantity = cart[id]
+            if (isNaN(quantity)) {
+                //quantity is Not a Number => set it to 1
+                cart[id] = 1;
+            }
+            else {
+                cart[id] = Number(quantity) + 1;
+            }
+
+            saveCart(cart);
+            location.reload();
+        }
+
+        function decrease(id) {
+            let cart = getShoppingCart();
+
+            let quantity = cart[id];
+            if (isNaN(quantity)) {
+                //quantity is Not a Number => exit
+                return;
+            }
+
+            quantity = Number(quantity);
+
+            if (quantity > 1) {
+                cart[id] = quantity - 1;
+                saveCart(cart);
+                location.reload();
+            }
+        }
+
+        function remove(id) {
+            let cart = getShoppingCart();
+
+            if (cart[id]) {
+                delete cart[id];
+                saveCart(cart);
+                location.reload();
+            }
         }
     </script>
 
