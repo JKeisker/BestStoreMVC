@@ -51,5 +51,25 @@ namespace BestStoreMVC.Controllers
 
             return View();
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var order = _context.Orders.Include(o => o.Items)
+                .ThenInclude(oi => oi.Product)
+                .Where(o => o.ClientId == currentUser.Id).FirstOrDefault(o => o.Id == id);
+
+            if (order == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(order);
+        }
     }
 }
