@@ -263,19 +263,17 @@ namespace BestStoreMVC.Controllers
                 var token = await userManager.GeneratePasswordResetTokenAsync(user);
                 string resetUrl = Url.ActionLink("ResetPassword", "Account", new { token }) ?? "URL Error";
 
-                ////send url by email
-                //string senderName = configuration["BrevoSettings:SenderName"] ?? "";
-                //string senderEmail = configuration["BrevoSettings:SenderEmail"] ?? "";
-                //string username = user.FirsName + " " + user.LastName;
-                //string subject = "Password Reset";
-                //string message = "Dear " + username + ",\n\n" +
-                //                 "You can reset your password using the following link:\n\n" +
-                //                 resetUrl + "\n\n" +
-                //                 "Best Regards";
+                //send url by email
+                string senderName = configuration["BrevoSettings:SenderName"] ?? "";
+                string senderEmail = configuration["BrevoSettings:SenderEmail"] ?? "";
+                string username = user.FirsName + " " + user.LastName;
+                string subject = "Password Reset";
+                string message = "Dear " + username + ",\n\n" +
+                                 "You can reset your password using the following link:\n\n" +
+                                 resetUrl + "\n\n" +
+                                 "Best Regards";
 
-                //EmailSender.SendEmail(senderName, senderEmail, username, email, subject, message);
-
-                Console.WriteLine("Password reset link: " + resetUrl);
+                EmailSender.SendEmail(senderName, senderEmail, username, email, subject, message);
             }
 
             ViewBag.SuccessMessage = "Please check your Email account and click on the Password Reset link!";
