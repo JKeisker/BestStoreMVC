@@ -273,7 +273,7 @@ namespace BestStoreMVC.Controllers
                                  resetUrl + "\n\n" +
                                  "Best Regards";
 
-                EmailSender.SendEmail(senderName, senderEmail, username, email, subject, message);
+                await EmailSender.SendEmail(senderName, senderEmail, username, email, subject, message);
             }
 
             ViewBag.SuccessMessage = "Please check your Email account and click on the Password Reset link!";
